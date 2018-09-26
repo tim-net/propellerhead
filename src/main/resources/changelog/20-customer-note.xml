@@ -1,0 +1,26 @@
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="1" author="Timofei Netisov">
+        <createTable tableName="customer_note" remarks="Customer note">
+            <column autoIncrement="true" name="id" type="int" remarks="ID">
+                <constraints primaryKey="true"
+                             primaryKeyName="pk_customer_note"
+                             nullable="false"/>
+            </column>
+            <column name="content" type="varchar(2000)" remarks="Note content">
+                <constraints nullable="false"/>
+            </column>
+            <column name="customer_id" type="int" remarks="Customer reference">
+                <constraints nullable="false" foreignKeyName="fk_customer_note_customer"
+                             references="customer" deleteCascade="true" />
+            </column>
+            <column name="create_date" type="timestamp" defaultValueComputed="current_timestamp"/>
+        </createTable>
+        <createIndex tableName="customer_note" indexName="idx_customer_note_customer_id">
+            <column name="customer_id"/>
+        </createIndex>
+
+    </changeSet>
+</databaseChangeLog>

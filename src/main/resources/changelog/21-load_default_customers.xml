@@ -1,0 +1,17 @@
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="16-load_program_service_config" author="Stanislav Slabospitskiy">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM customer</sqlCheck>
+        </preConditions>
+        <loadData tableName="customer"
+                  file="customer_default_data.csv"
+                  separator=";"
+                  relativeToChangelogFile="true"
+        >
+            <column name="status" type="numeric"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

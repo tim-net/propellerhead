@@ -23,16 +23,18 @@ repositories {
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
-//	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 
+	compile "com.querydsl:querydsl-jpa:${querydsl_jpa_version}"
 	compile('org.liquibase:liquibase-core')
 	compile('org.xerial:sqlite-jdbc')
+	
 	/* Hibernate packages */
-//	compile "org.hibernate:hibernate-core:${org_hibernate_version}"
-//	compile "org.hibernate:hibernate-entitymanager:${org_hibernate_version}"
+	compile "org.hibernate:hibernate-core:${org_hibernate_version}"
+	compile "org.hibernate:hibernate-entitymanager:${org_hibernate_version}"
 
 	/* Commons packages */
-	compile "org.apache.commons:commons-lang3:${commons_lang_version}"
+//	compile "org.apache.commons:commons-lang3:${commons_lang_version}"
 
 	/* Swagger packages */
 	compile "io.springfox:springfox-swagger2:${io_springfox_swagger_version}"

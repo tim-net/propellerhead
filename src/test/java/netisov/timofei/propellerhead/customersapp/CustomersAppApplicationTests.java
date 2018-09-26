@@ -1,4 +1,4 @@
-package netisov.timofei.customersapp;
+package netisov.timofei.propellerhead.customersapp;
 
 import org.junit.Ignore;
 import org.junit.Test;

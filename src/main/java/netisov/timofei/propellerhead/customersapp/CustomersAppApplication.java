@@ -1,8 +1,7 @@
-package netisov.timofei.customersapp;
+package netisov.timofei.propellerhead.customersapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 @SpringBootApplication(scanBasePackages = {"netisov.timofei"})
 public class CustomersAppApplication {
