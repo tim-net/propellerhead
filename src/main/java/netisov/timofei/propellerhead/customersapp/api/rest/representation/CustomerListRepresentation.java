@@ -1,4 +1,4 @@
-package netisov.timofei.propellerhead.customersapp.api.rest.model;
+package netisov.timofei.propellerhead.customersapp.api.rest.representation;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -21,7 +21,7 @@ public class CustomerListRepresentation {
     private Long count;
 
     @ApiModelProperty(value = "Customers list", position = 20)
-    private List<CustomerRepresentation> incidents;
+    private List<CustomerRepresentation> customers;
 
     @AllArgsConstructor(access = AccessLevel.PROTECTED)
     @NoArgsConstructor(access = AccessLevel.PROTECTED)

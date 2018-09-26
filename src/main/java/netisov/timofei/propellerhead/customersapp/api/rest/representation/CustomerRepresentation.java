@@ -1,10 +1,10 @@
-package netisov.timofei.propellerhead.customersapp.api.rest.model;
+package netisov.timofei.propellerhead.customersapp.api.rest.representation;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Representation model of a customer
+ * Representation representation of a customer
  */
 @ApiModel(value = "CustomerRepresentation", description = "CustomerRepresentation company")
 public class CustomerRepresentation {

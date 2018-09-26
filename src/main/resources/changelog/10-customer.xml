@@ -16,7 +16,7 @@
             <column name="status" type="int" remarks="Status">
                 <constraints nullable="false"/>
             </column>
-            <column name="create_date" type="timestamp" defaultValueComputed="current_timestamp"/>
+            <column name="created" type="timestamp" defaultValueComputed="current_timestamp"/>
         </createTable>
         <createIndex tableName="customer" indexName="idx_customer_name">
             <column name="name"/>

@@ -2,17 +2,27 @@ spring:
   application:
     name: Customers application
   datasource:
-    url: jdbc:sqlite:customersapp.db
-    driver-class-name: org.sqlite.JDBC
+    url: jdbc:h2:mem::customersapp.db
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
   jpa:
     hibernate:
       ddl-auto: none
     properties:
       hibernate:
-        dialect: netisov.timofei.propellerhead.customersapp.db.SQLiteDialect
+        dialect: org.hibernate.dialect.H2Dialect
         id.new_generator_mappings: true
         generate_statistics: false
         cache:
           use_second_level_cache: false
           use_query_cache: false
     show-sql: false
+  liquibase:
+    change-log: classpath:/changelog/master.xml
+    enabled: true
+  server:
+   session:
+     cookie:
+       http-only: true
+

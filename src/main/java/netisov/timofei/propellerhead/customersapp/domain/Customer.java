@@ -1,8 +1,11 @@
 package netisov.timofei.propellerhead.customersapp.domain;
 
+import lombok.Getter;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -10,6 +13,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "customer")
+@Getter
 public class Customer {
 
     @Id
@@ -29,6 +33,9 @@ public class Customer {
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.ORDINAL)
     private CustomerStatus status;
+
+    @Column(name = "created", nullable = false)
+    private LocalDateTime created;
 
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
     private List<CustomerNote> notes;
