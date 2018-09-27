@@ -17,6 +17,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.util.Collections;
 import java.util.List;
 
 @Configuration
@@ -84,7 +85,7 @@ public class SwaggerConfiguration implements WebMvcConfigurer {
                 ),
                 null,
                 null,
-                List.of()
+                Collections.emptyList()
         );
     }
 }

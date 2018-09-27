@@ -1,12 +1,13 @@
 package netisov.timofei.propellerhead.customersapp.domain;
 
-import lombok.Getter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * CustomerRepresentation entity
@@ -14,10 +15,11 @@ import java.util.List;
 @Entity
 @Table(name = "customer")
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Customer {
 
     @Id
-    @GeneratedValue(generator = "sqlite")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
@@ -34,10 +36,22 @@ public class Customer {
     @Enumerated(EnumType.ORDINAL)
     private CustomerStatus status;
 
-    @Column(name = "created", nullable = false)
+    @Column(name = "created", nullable = false, updatable = false)
     private LocalDateTime created;
 
-    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
+    @Setter
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<CustomerNote> notes;
+
+    @Builder
+    public Customer(Integer id, String name, String contact, CustomerStatus status, List<CustomerNote> notes) {
+        Objects.requireNonNull(name);
+        this.id = id;
+        this.name = name;
+        this.contact = contact;
+        this.status = status;
+        this.notes = notes;
+    }
+
 
 }

@@ -15,7 +15,8 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 @Getter
-public class CustomerListRepresentation {
+@ApiModel(value = "CustomersListRepresentation", description = "Customers list")
+public class CustomersListRepresentation {
 
     @ApiModelProperty(value = "Total number of customers", position = 10)
     private Long count;
@@ -38,6 +39,9 @@ public class CustomerListRepresentation {
 
         @ApiModelProperty(value = "Creation date and time", position = 30)
         private LocalDateTime created;
+
+        @ApiModelProperty(value = "Status", position = 30)
+        private String status;
 
     }
 }

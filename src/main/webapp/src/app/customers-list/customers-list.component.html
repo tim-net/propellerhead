@@ -1,0 +1,16 @@
+<div class="col-12">
+  <ag-grid-angular
+    class="ag-theme-material"
+    style="height: 300px"
+    rowSelection="single"
+    [columnDefs]="columnDefs"
+    [gridOptions]="gridOptions"
+    (gridReady)="onGridReady($event)"
+    [rowData]="records">
+  </ag-grid-angular>
+  <div class="row">
+    <div class="col-xs-12 col-12">
+      <pagination [totalItems]="countAllData" [itemsPerPage]="filter.size" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"></pagination>
+    </div>
+  </div>
+</div>

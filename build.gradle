@@ -11,7 +11,6 @@ buildscript {
         classpath "gradle.plugin.com.ewerk.gradle.plugins:querydsl-plugin:${querydsl_plugin_version}"
         classpath "io.franzbecker:gradle-lombok:${gradle_lombok_version}"
         classpath "org.springframework.build.gradle:propdeps-plugin:${propdeps_plugin_version}"
-//        classpath "com.moowork.gradle:gradle-node-plugin:${gradle_node_plugin_version}"
         classpath "io.spring.gradle:dependency-management-plugin:${dependency_management_plugin_version}"
     }
 }
@@ -43,7 +42,6 @@ dependencies {
     /** Database packages**/
     compile "com.querydsl:querydsl-jpa:${querydsl_jpa_version}"
     compile('org.liquibase:liquibase-core')
-//    compile('org.xerial:sqlite-jdbc')
     compile("com.h2database:h2:${h2database_version}")
 
     /* Hibernate packages */

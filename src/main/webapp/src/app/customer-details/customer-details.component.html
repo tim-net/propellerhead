@@ -1,0 +1,50 @@
+<div class="container">
+  <form>
+    <div class="card" style="width: 500px">
+      <div class="card-body">
+        <h2 class="card-title">{{customer?.name}}</h2>
+        <p class="card-text">Contact info: {{customer?.contact}}</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <div class="form-group">
+            <label for="status">Status</label>
+            <select name="status" [value] = "customer?.status" class="form-control" id="status" required>
+              <option [selected]="customer?.status == status" *ngFor="let status of customerStatusKeys()"
+                [value]="status">{{customerStatusValue(status)}}</option>
+            </select>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <h2>Notes</h2>
+    <div class="form-group">
+      <div class="row" *ngFor="let note of customer?.notes">
+        <div class="col-10" *ngIf="note.editing == false">
+          {{note.content}}
+        </div>
+        <div class="col-10" *ngIf="note.editing">
+          <textarea [maxlength]="2000" [(ngModel)]="note.content" [ngModelOptions]="{standalone: true}" class="form-control"></textarea>
+        </div>
+        <div class="col-10">
+          <button *ngIf="note.editing == false" type="button" class="btn btn-secondary" (click)="editNote(note)">Edit note</button>
+          <button *ngIf="note.editing" type="button" class="btn btn-secondary" (click)="saveNote(note)">Save note</button>
+        </div>
+      </div>
+      <div class="row">
+        <button type="button" class="btn btn-primary" (click)="addNote()">Add note</button>
+      </div>
+    </div>
+
+    <div *ngIf="saveCustomerStatus == 'SUCCESS'" class="alert alert-success" role="alert">
+      The customer is saved successfully!
+    </div>
+
+    <div *ngIf="saveCustomerStatus == 'ERROR'" class="alert alert-warning" role="alert">
+      Saving the customer has failed.
+    </div>
+
+    <button type="button" class="btn btn-success" (click)="saveCustomer()" value="Back">Save customer</button>
+    <button type="button" class="btn btn-default" (click)="goBack()" value="Back">Back</button>
+  </form>
+</div>
