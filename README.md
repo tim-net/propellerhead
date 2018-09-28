@@ -12,3 +12,19 @@ The project uses in-memory database H2, thus only one
 monitor sql queries in console and check database state 
 on address http://localhost:8080/h2console. Also there is Swagger UI to check
 REST API requests accessible via http://localhost:8080/swagger-ui.html.
+The project is using lombok library, so to have the code correctly compiled in IDE you have to install Lombok Plugin and enable annotation processing in IDE settings(I use Intellij Idea) : 
+Preferences (Ctrl + Alt + S)
+Build, Execution, Deployment
+Compiler
+Annotation Processors
+Enable annotation processing
+Make sure you have the Lombok plugin for IntelliJ installed!
+
+Preferences -> Plugins
+Search for "Lombok Plugin"
+Click Browse repositories...
+Choose Lombok Plugin
+Install
+Restart IntelliJ
+
+
