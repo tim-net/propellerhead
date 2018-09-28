@@ -36,7 +36,6 @@ public class Customer {
     @Enumerated(EnumType.ORDINAL)
     private CustomerStatus status;
 
-    @NotNull
     @Column(name = "created", nullable = false, updatable = false, insertable = false)
     private LocalDateTime created;
 
