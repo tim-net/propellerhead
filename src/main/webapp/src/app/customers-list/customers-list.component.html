@@ -1,4 +1,16 @@
 <div class="col-12">
+  <form class="form-inline" name="form" (ngSubmit)="loadAll()">
+    <div class="form-group mx-sm-3 mb-2">
+      <label for="searchByName" class="sr-only">Name</label>
+      <input name="searchByName" type="text" [(ngModel)]="filter.name" class="form-control" id="searchByName"
+             placeholder="Name">
+    </div>
+    <button class="btn btn-primary mb-2">Search</button>
+    <div class="form-group mx-sm-3">
+      <button type="button" (click)="resetFilterName()" class="btn btn-primary mb-2">Reset</button>
+    </div>
+  </form>
+
   <ag-grid-angular
     class="ag-theme-material"
     style="height: 300px"
@@ -10,7 +22,8 @@
   </ag-grid-angular>
   <div class="row">
     <div class="col-xs-12 col-12">
-      <pagination [totalItems]="countAllData" [itemsPerPage]="filter.size" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"></pagination>
+      <pagination [totalItems]="countAllData" [itemsPerPage]="filter.size" [(ngModel)]="currentPage"
+                  (pageChanged)="pageChanged($event)"></pagination>
     </div>
   </div>
 </div>

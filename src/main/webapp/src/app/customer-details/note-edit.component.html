@@ -1,0 +1,23 @@
+<form #f="ngForm" name="form" (ngSubmit)="f.form.valid && saveNote(note)">
+  <div class="form-group">
+    <textarea type="text" class="form-control"
+              name="noteContent" [(ngModel)]="noteContentEditing" #noteContent="ngModel" maxlength="2000"
+              [ngClass]="{ 'is-invalid': f.submitted && noteContent.invalid }" required></textarea>
+    <div *ngIf="f.submitted && noteContent.invalid" class="invalid-feedback">
+      <div *ngIf="noteContent?.errors.required">Note content is required</div>
+      <div *ngIf="noteContent?.errors.maxlength">
+        Note content must be 2000 characters long maximum.
+      </div>
+    </div>
+    <hr class="my-4">
+    <div class="row">
+      <div class="form-group col-2">
+        <button class="btn btn-primary">Save note</button>
+      </div>
+      <div class="col-2">
+        <button type="button" (click)="cancelForm()" class="btn btn-default">Cancel</button>
+      </div>
+    </div>
+
+  </div>
+</form>

@@ -5,6 +5,7 @@ import {CustomersListService} from "./customers-list.service";
 import {Subscription} from "rxjs";
 import {CustomerNameCell} from "./customer-name-cell";
 import {DateComponent} from "../shared/date.component";
+import {CustomerStatusCell} from "./customer-status-cell";
 
 @Component({
   selector: 'customers-list',
@@ -20,7 +21,7 @@ export class CustomersListComponent implements OnInit {
   loadPending = false;
   private subscription: Subscription;
   gridOptions: GridOptions = <GridOptions>{
-    sortingOrder: ["asc","desc"],
+    sortingOrder: ["asc", "desc"],
     onModelUpdated: () => {
       this.gridOptions.api.sizeColumnsToFit();
     },
@@ -47,7 +48,7 @@ export class CustomersListComponent implements OnInit {
     return [
       {headerName: "Id", field: "id", width: 500},
       {headerName: "Name", field: "name", sort: 'asc', cellRendererFramework: CustomerNameCell, width: 500},
-      {headerName: "Status", field: "status", width: 200},
+      {headerName: "Status", field: "status", cellRendererFramework: CustomerStatusCell, width: 200},
       {headerName: "Created", field: "created", cellRendererFramework: DateComponent, width: 170}
     ];
   }
@@ -65,7 +66,7 @@ export class CustomersListComponent implements OnInit {
   ngOnInit() {
   }
 
-  private loadAll() {
+  public loadAll() {
     if (!!this.subscription) {
       this.subscription.unsubscribe();
     }
@@ -76,13 +77,18 @@ export class CustomersListComponent implements OnInit {
     );
   }
 
+  public resetFilterName() {
+    this.filter.name = null;
+    this.loadAll();
+  }
+
   private onSuccess(data) {
     this.countAllData = data["count"];
     this.records = data["customers"];
     this.loadPending = false;
   }
 
-  pageChanged(event:any) {
+  pageChanged(event: any) {
     this.filter.page = event.page - 1;
     this.updateLayoutAndLoadData();
   }

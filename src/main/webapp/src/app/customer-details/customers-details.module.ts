@@ -1,7 +1,8 @@
 import {CommonModule} from "@angular/common";
-import {NgModule} from "@angular/core";
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from "@angular/core";
 import {CustomerDetailsComponent} from "./customer-details.component";
 import {FormsModule} from "@angular/forms";
+import {NoteEditComponent} from "./note-edit.component";
 
 @NgModule({
   imports: [
@@ -10,10 +11,11 @@ import {FormsModule} from "@angular/forms";
   ],
   declarations: [
     CustomerDetailsComponent,
+    NoteEditComponent
   ],
-  entryComponents: [
-  ],
-  providers: []
+  entryComponents: [],
+  providers: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CustomersDetailsModule {
 

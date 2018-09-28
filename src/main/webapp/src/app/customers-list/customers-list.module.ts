@@ -8,10 +8,11 @@ import {RouterModule} from "@angular/router";
 import {DateComponent} from "../shared/date.component";
 import {PaginationModule} from "ngx-bootstrap";
 import {FormsModule} from "@angular/forms";
+import {CustomerStatusCell} from "./customer-status-cell";
 
 @NgModule({
   imports: [
-    AgGridModule.withComponents([CustomerNameCell, DateComponent]),
+    AgGridModule.withComponents([CustomerNameCell, DateComponent, CustomerStatusCell]),
     CommonModule,
     RouterModule,
     FormsModule,
@@ -20,7 +21,8 @@ import {FormsModule} from "@angular/forms";
   declarations: [
     CustomerNameCell,
     DateComponent,
-    CustomersListComponent
+    CustomersListComponent,
+    CustomerStatusCell
   ],
   entryComponents: [
     CustomerNameCell,

@@ -9,42 +9,58 @@
         <li class="list-group-item">
           <div class="form-group">
             <label for="status">Status</label>
-            <select name="status" [value] = "customer?.status" class="form-control" id="status" required>
+            <select name="status" [(ngModel)]="customer && customer.status" class="form-control" id="status" required>
               <option [selected]="customer?.status == status" *ngFor="let status of customerStatusKeys()"
-                [value]="status">{{customerStatusValue(status)}}</option>
+                      [value]="status">{{customerStatusValue(status)}}
+              </option>
             </select>
           </div>
         </li>
       </ul>
     </div>
     <h2>Notes</h2>
-    <div class="form-group">
-      <div class="row" *ngFor="let note of customer?.notes">
-        <div class="col-10" *ngIf="note.editing == false">
-          {{note.content}}
+    <div class="jumbotron">
+      <div class="container">
+        <ul class="list-group" *ngFor="let note of customer?.notes">
+          <li class="list-group-item">
+            <div *ngIf="note.editing == false">
+              <div class="row">
+                <div class="col-8">{{(note.content.length>50)? (note.content | slice:0:50)+'...':(note.content)}}</div>
+                <div class="col-4">
+                  <button *ngIf="note.editing == false" type="button"
+                          class="btn btn-secondary" (click)="editNote(note)">
+                    Edit
+                    note
+                  </button>
+                </div>
+              </div>
+
+            </div>
+            <app-note-edit *ngIf="note.editing" [note]="note" [notes]="customer.notes"></app-note-edit>
+          </li>
+          <hr class="my-4">
+
+        </ul>
+
+
+        <div class="row">
+          <button type="button" class="btn btn-primary pull-right" (click)="addNote()">Add note</button>
         </div>
-        <div class="col-10" *ngIf="note.editing">
-          <textarea [maxlength]="2000" [(ngModel)]="note.content" [ngModelOptions]="{standalone: true}" class="form-control"></textarea>
+        <hr class="my-4">
+
+        <div *ngIf="saveCustomerStatus?.toString() == 'SUCCESS'" class="alert alert-success" role="alert">
+          The customer is saved successfully!
         </div>
-        <div class="col-10">
-          <button *ngIf="note.editing == false" type="button" class="btn btn-secondary" (click)="editNote(note)">Edit note</button>
-          <button *ngIf="note.editing" type="button" class="btn btn-secondary" (click)="saveNote(note)">Save note</button>
+
+        <div *ngIf="saveCustomerStatus?.toString() == 'ERROR'" class="alert alert-warning" role="alert">
+          Saving the customer has failed.
+        </div>
+        <div class="row">
+          <button type="button" class="btn btn-success pull-left" (click)="saveCustomer()" value="Back">Save customer
+          </button>
+          <button type="button" class="btn btn-secondary mx-sm-3" (click)="goBack()" value="Back">Back</button>
         </div>
       </div>
-      <div class="row">
-        <button type="button" class="btn btn-primary" (click)="addNote()">Add note</button>
-      </div>
     </div>
-
-    <div *ngIf="saveCustomerStatus == 'SUCCESS'" class="alert alert-success" role="alert">
-      The customer is saved successfully!
-    </div>
-
-    <div *ngIf="saveCustomerStatus == 'ERROR'" class="alert alert-warning" role="alert">
-      Saving the customer has failed.
-    </div>
-
-    <button type="button" class="btn btn-success" (click)="saveCustomer()" value="Back">Save customer</button>
-    <button type="button" class="btn btn-default" (click)="goBack()" value="Back">Back</button>
   </form>
 </div>

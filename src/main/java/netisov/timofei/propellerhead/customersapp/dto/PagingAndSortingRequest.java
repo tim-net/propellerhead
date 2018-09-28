@@ -15,8 +15,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * The class to extend for search queries based on the using of querydsl
- * Базовый класс для поисковых запросов с постраничным листанием, основанный на использовании QueryDsl.
+ * The class to extend for search queries based on the using of querydsl.
  */
 @SuppressWarnings("unused")
 @Getter

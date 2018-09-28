@@ -30,7 +30,7 @@ public class CustomerNote {
     @Column(name = "content")
     private String content;
 
-//    @NotNull
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
     private Customer customer;

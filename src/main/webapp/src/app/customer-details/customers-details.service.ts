@@ -17,8 +17,8 @@ export class CustomersDetailsService {
     return this.http.get(this.resourceUrl + "/details/" + id, {});
   }
 
-  save(customer:CustomerDetailsModel):Observable<CustomerDetailsModel> {
-    return this.http.post<CustomerDetailsModel>(this.resourceUrl + "/save", customer);
+  save(customer: CustomerDetailsModel): Observable<boolean> {
+    return this.http.post<boolean>(this.resourceUrl + "/save", customer);
   }
 
 }

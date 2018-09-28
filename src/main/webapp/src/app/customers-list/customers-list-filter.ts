@@ -16,8 +16,10 @@ export class CustomersListFilter {
   }
 
   set name(value: string) {
-    if(value) {
+    if (value) {
       this.params = this.params.set('name', value.toString());
+    } else {
+      this.params = this.params.delete('name');
     }
   }
 

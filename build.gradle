@@ -50,6 +50,7 @@ dependencies {
 
     /* Commons packages */
     compile "org.apache.commons:commons-lang3:${commons_lang_version}"
+    compile "javax.xml.bind:jaxb-api:${jaxb_version}"
 
     /* Swagger packages */
     compile "io.springfox:springfox-swagger2:${io_springfox_swagger_version}"
@@ -68,6 +69,7 @@ dependencies {
     testCompile "org.mockito:mockito-core:${mockito_version}"
     testCompile "org.dbunit:dbunit:${dbunit_version}"
     testCompile "com.github.springtestdbunit:spring-test-dbunit:${spring_test_dbunit_version}"
+    testCompile "javax.xml.bind:jaxb-api:${jaxb_version}"
 }
 
 def webappDir = "$projectDir/src/main/webapp"
