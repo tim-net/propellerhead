@@ -23,6 +23,9 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.lang.reflect.Field;
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.List;
 
 import static org.mockito.Mockito.doReturn;
@@ -53,6 +56,18 @@ public class CustomerResourceTest {
                 .status(CustomerStatus.CURRENT)
                 .build();
 
+        LocalDateTime created = LocalDateTime.of(2018, Month.OCTOBER, 1, 0, 0);
+
+
+        // As created field cannot be inserted or updated, we need to set it explicitly using reflection
+        try {
+            Field createdField = Customer.class.getDeclaredField("created");
+            createdField.setAccessible(true);
+            createdField.set(customer, created);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException("There is a mistake in the test code");
+        }
+
         List<CustomerNote> notes = List.of(
                 CustomerNote.builder()
                         .content("note1")
@@ -78,7 +93,7 @@ public class CustomerResourceTest {
                 "/api/customer/details/1").accept(
                 MediaType.APPLICATION_JSON);
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-        String expected = "{'id':1,'name':'Mock customer','created':null," +
+        String expected = "{'id':1,'name':'Mock customer','created':'2018-10-01T00:00:00'," +
                 "'status':'CURRENT','contact':'contact1','notes':[{'id':1,'content':'note1'}," +
                 "{'id':2,'content':'note2'}]}";
         JSONAssert.assertEquals(expected, result.getResponse()
