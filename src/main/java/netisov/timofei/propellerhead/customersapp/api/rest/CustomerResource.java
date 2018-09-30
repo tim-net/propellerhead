@@ -20,6 +20,9 @@ public class CustomerResource {
     private final Logger log = LoggerFactory.getLogger(CustomerResource.class);
 
     private final CustomerService customerService;
+    /**
+     * Converter for converting entities to the customer representation object
+     */
     private final CustomerListItemConverter customerListItemConverter = new CustomerListItemConverter();
 
 
@@ -27,6 +30,14 @@ public class CustomerResource {
         this.customerService = customerService;
     }
 
+    /**
+     * Returns a representation object which contains
+     * a list of found customers whithin a range of a page's size
+     * and the total number of
+     * customers found using a filter.
+     * @param filter filter containing search conditions
+     * @return
+     */
     @GetMapping("/find-all")
     public CustomersListRepresentation findAll(CustomerListFilter filter) {
         log.debug("REST request to get a page of Customers");
@@ -37,12 +48,22 @@ public class CustomerResource {
                 .build();
     }
 
+    /**
+     * Returns one customer found by its id
+     * @param id id of a customer
+     * @return
+     */
     @GetMapping("/details/{id}")
     public CustomerDetailsRepresentation getDetails(@PathVariable Integer id) {
         log.debug("REST request to get details of a Customer");
         return customerService.getOneWithNotes(id);
     }
 
+    /**
+     * Saves a customer.
+     * @param customer
+     * @return true if the operation was successful
+     */
     @PostMapping("/save")
     public boolean save(@RequestBody CustomerDetailsRepresentation customer) {
         try {

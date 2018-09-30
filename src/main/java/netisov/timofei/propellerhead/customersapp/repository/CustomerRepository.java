@@ -11,6 +11,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CustomerRepository extends RepositoryBase<Customer, Integer> {
 
+    /**
+     * Returns a customer with its notes found by id.
+     * @param id id of a customer
+     * @return
+     */
     @Query("select c from Customer c left join fetch c.notes where c.id=?1")
     Customer getOneWithNotes(Integer id);
 }

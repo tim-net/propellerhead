@@ -31,11 +31,23 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-
+    /**
+     * Returns a page object containing found customers by search conditions
+     * got from a filter. Uses converter to convert entities to customer representation objects.
+     * @param filter search conditions
+     * @param converter converter to a representation object
+     * @param <R> class of a representation object.
+     * @return
+     */
     public <R> Page<R> search(@NotNull @Valid PagingAndSortingRequest filter, @NotNull Function<Customer, R> converter) {
         return customerRepository.findAll(filter.predicate(), filter.pageable()).map(converter);
     }
 
+    /**
+     * Returns a customer with its notes as a representation object.
+     * @param id id of a customer
+     * @return
+     */
     public CustomerDetailsRepresentation getOneWithNotes(@NotNull @Valid Integer id) {
         Customer customer = customerRepository.getOneWithNotes(id);
         return CustomerDetailsRepresentation.builder()
@@ -52,6 +64,10 @@ public class CustomerService {
                 .build();
     }
 
+    /**
+     * Save a customer and its notes.
+     * @param customer customer representation object.
+     */
     public void save(CustomerDetailsRepresentation customer) {
         Customer customerToSave = Optional.of(customer).map(c -> Customer.builder()
                 .id(c.getId())
