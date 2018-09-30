@@ -1,6 +1,9 @@
 spring:
   application:
     name: Customers application
+  profiles:
+    active: dev
+    include: swagger
   datasource:
     url: jdbc:h2:mem::customersapp.db;DB_CLOSE_DELAY=-1;MODE=MySQL;MV_STORE=FALSE;MVCC=FALSE
     driver-class-name: org.h2.Driver
@@ -17,13 +20,15 @@ spring:
         cache:
           use_second_level_cache: false
           use_query_cache: false
-    show-sql: false
+    show-sql: true
   liquibase:
     change-log: classpath:/changelog/master.xml
     enabled: true
-  profiles:
-    active: default
-    include: default
+  h2:
+    console:
+      enabled: true
+      path: /h2console
+
 
 # ===================================================================
 # Logback configuration
@@ -31,5 +36,4 @@ spring:
 
 logging:
   level:
-    ru.amt.rtrssrvmon: INFO
-
+    ru.amt.rtrssrvmon: DEBUG

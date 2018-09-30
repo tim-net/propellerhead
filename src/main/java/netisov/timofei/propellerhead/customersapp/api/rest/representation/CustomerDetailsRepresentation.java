@@ -17,7 +17,7 @@ import java.util.List;
 @Getter
 @ApiModel(value = "CustomerDetailsRepresentation", description = "Customer details representation")
 public class CustomerDetailsRepresentation {
-    @ApiModelProperty(value = "Identity", position = 10)
+    @ApiModelProperty(value = "Identity", example = "1", position = 10)
     private Integer id;
 
     @ApiModelProperty(value = "Name", position = 20)
@@ -42,7 +42,7 @@ public class CustomerDetailsRepresentation {
     @ApiModel(value = "CustomerNoteRepresentation", description = "Customer note representation")
     public static class CustomerNoteRepresentation {
 
-        @ApiModelProperty(value = "Identity", position = 10)
+        @ApiModelProperty(value = "Identity", example = "1", position = 10)
         private Integer id;
 
         @ApiModelProperty(value = "Content", position = 20)

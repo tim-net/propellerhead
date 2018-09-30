@@ -73,6 +73,12 @@ dependencies {
 }
 
 def webappDir = "$projectDir/src/main/webapp"
+
+def profile = 'default'
+
+if (project.hasProperty('dev')) {
+    profile = 'dev'
+}
 sourceSets {
     main {
         resources {
@@ -84,10 +90,6 @@ sourceSets {
     }
 }
 
-processResources {
-    dependsOn "buildAngular"
-}
-
 task buildAngular(type: Exec) {
     // installAngular should be run prior to this task
     dependsOn "installAngular"
@@ -95,13 +97,35 @@ task buildAngular(type: Exec) {
     inputs.dir "$webappDir"
     // Add task to the standard build group
     group = BasePlugin.BUILD_GROUP
+    def buildCmd = "build"
+
+    if (project.hasProperty('dev')) {
+        buildCmd = 'build-dev'
+    } 
     // ng doesn't exist as a file in windows -> npm.cmd run ng
     if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")) {
-        commandLine "npm.cmd", "run", "ng", "build"
+        commandLine "npm.cmd", "run", buildCmd
     } else {
-        commandLine "ng", "build"
+        commandLine "npm", "run", buildCmd
     }
 }
+
+
+processResources {
+    dependsOn "buildAngular"
+    filesMatching('**/application.yml') {
+        filter {
+            it.replace('#spring.profiles.active#', profile)
+        }
+    }
+}
+
+bootRun {
+    args = ["--spring.profiles.active=" + profile]
+}
+
+processResources.mustRunAfter buildAngular
+
 
 task installAngular(type: Exec) {
     workingDir "$webappDir"

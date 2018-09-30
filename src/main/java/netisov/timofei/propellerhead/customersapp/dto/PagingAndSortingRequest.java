@@ -23,9 +23,9 @@ import java.util.List;
 public abstract class PagingAndSortingRequest<T> {
     @ApiModelProperty(value = "Parameters of sorting", position = 10001)
     protected String sort;
-    @ApiModelProperty(value = "Page number", position = 10002)
+    @ApiModelProperty(value = "Page number",example = "1", position = 10002)
     protected Integer page;
-    @ApiModelProperty(value = "Page size", position = 10003)
+    @ApiModelProperty(value = "Page size", example = "10", position = 10003)
     protected Integer size;
 
 
