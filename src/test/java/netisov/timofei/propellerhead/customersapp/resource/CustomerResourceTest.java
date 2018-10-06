@@ -26,6 +26,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.Mockito.doReturn;
@@ -68,7 +69,7 @@ public class CustomerResourceTest {
             throw new RuntimeException("There is a mistake in the test code");
         }
 
-        List<CustomerNote> notes = List.of(
+        List<CustomerNote> notes = Arrays.asList(
                 CustomerNote.builder()
                         .content("note1")
                         .id(1)
