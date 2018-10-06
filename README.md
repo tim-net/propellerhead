@@ -30,3 +30,4 @@ Install
 Restart IntelliJ
 
 
+CI Integrated
